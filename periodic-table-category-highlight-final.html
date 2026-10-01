@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Periodic Table · جدول تناوبی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f8;--cd:#fff;--tx:#17203a;--mu:#5d6a86;--bd:#d8e0ee;--ac:#3d5afe;--s:80%;--l:89%;--c:46px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1020;--cd:#141c30;--tx:#e8edf9;--mu:#95a2c0;--bd:#26314d;--ac:#82a0ff;--s:45%;--l:24%}}
+:root[data-theme="dark"]{--bg:#0a1020;--cd:#141c30;--tx:#e8edf9;--mu:#95a2c0;--bd:#26314d;--ac:#82a0ff;--s:45%;--l:24%}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.7 Vazirmatn,Tahoma,system-ui,sans-serif;transition:background .4s,color .4s}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px}
+h1{margin:0;font-size:22px;color:var(--ac);text-shadow:0 0 5px var(--ac),0 0 14px var(--ac)}
+.bt button{border:1px solid var(--bd);background:var(--cd);border-radius:12px;padding:5px 13px;margin-inline-start:6px;transition:.2s}
+@media(hover:hover){.bt button:hover{transform:translateY(-2px);border-color:var(--ac)}}
+.tabs{display:flex;gap:8px;padding:0 16px 10px}
+.tabs button{flex:1;max-width:190px;border:1px solid var(--bd);border-radius:12px;padding:8px;background:var(--cd);transition:.25s}
+.tabs .on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{padding:0 12px 28px}
+section{animation:fd .4s}
+.lg{display:flex;flex-wrap:wrap;gap:6px;margin:4px 4px 12px;font-size:12px}
+.lg span{padding:1px 10px;border-radius:99px;background:hsl(var(--h) var(--s) var(--l));border:1px solid hsl(var(--h) 60% 55%);cursor:pointer;transition:.2s}.lg span:hover{transform:translateY(-1px)}.lg span.all{background:var(--cd);border-color:var(--bd);font-weight:700}.lg span.all.sel{background:var(--ac);color:#fff;box-shadow:0 0 0 2px var(--ac),0 0 14px var(--ac)}.lg span.sel{box-shadow:0 0 0 2px var(--ac),0 0 14px var(--ac);font-weight:700}.grid.cat-focus .el:not(.cat-match){opacity:.18;filter:saturate(.25)}.grid.cat-focus .el.cat-match{opacity:1;box-shadow:0 0 0 2px var(--ac),0 0 18px var(--ac);transform:scale(1.04);z-index:2}
+.ak{--h:355}.ae{--h:28}.md{--h:52}.ln{--h:85}.nm{--h:140}.pt{--h:175}.tm{--h:210}.ac{--h:245}.ng{--h:280}.hl{--h:315}
+.sc{overflow-x:auto;padding:6px 4px 10px;-webkit-overflow-scrolling:touch}
+.grid{display:grid;grid-template-columns:repeat(18,var(--c));grid-template-rows:repeat(7,var(--c)) 14px repeat(2,var(--c));gap:3px;width:max-content;margin:0 auto}
+.el{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;border-radius:8px;border:1px solid hsl(var(--h) 60% 55%);background:hsl(var(--h) var(--s) var(--l));color:var(--tx);animation:pop .5s backwards;transition:transform .2s,box-shadow .2s}
+@media(hover:hover){button.el:hover{transform:scale(1.2);z-index:2;box-shadow:0 8px 20px rgba(0,0,0,.3)}}
+.el i{position:absolute;top:2px;inset-inline-start:4px;font-size:calc(var(--c)*.2);font-style:normal;opacity:.8}
+.el b{font-size:calc(var(--c)*.38);line-height:1.1}
+.el small{position:absolute;bottom:2px;inset-inline-start:4px;font-size:calc(var(--c)*.2);opacity:.8;line-height:1.1}
+.el em{display:none;font-style:normal;font-size:calc(var(--c)*.15);max-width:100%;overflow:hidden;white-space:nowrap}
+@media(min-width:1000px){.el em{display:block}}
+.ph{background:none;border:1px dashed var(--mu);opacity:.6}
+.ph b{font-size:calc(var(--c)*.22)}
+@keyframes pop{from{opacity:0;transform:scale(.4) translateY(12px)}}
+@keyframes fd{from{opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(40px) scale(.94)}}
+@keyframes pl{50%{transform:scale(1.1)}}
+.ov{position:fixed;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:rgba(5,10,25,.62);backdrop-filter:blur(4px);padding:calc(12px + env(safe-area-inset-top,0px)) 12px calc(12px + env(safe-area-inset-bottom,0px));animation:fd .25s}
+.ov[hidden]{display:none}
+.box{position:relative;width:min(470px,100%);max-height:100%;overflow-y:auto;padding:18px;background:var(--cd);border:1px solid var(--bd);border-radius:20px;animation:up .35s cubic-bezier(.2,.9,.3,1.2)}
+.x{position:absolute;top:10px;inset-inline-end:10px;width:32px;height:32px;border:0;border-radius:50%;background:var(--bd)}
+.hd{display:flex;align-items:center;gap:12px;padding-inline-end:36px}
+.hd h2{margin:0;font-size:20px;line-height:1.3}
+.hd p{margin:0;color:var(--mu)}
+.sy{flex:none;display:grid;place-items:center;width:68px;height:68px;border-radius:16px;font-size:32px;font-weight:700;background:hsl(var(--h) var(--s) var(--l));border:2px solid hsl(var(--h) 60% 55%)}
+.bohr svg{display:block;width:100%;max-width:310px;margin:6px auto}
+.ob{fill:none;stroke:var(--bd);stroke-width:1;stroke-dasharray:3 4}
+.e{fill:var(--ac);stroke:var(--cd);stroke-width:.8}
+.nc{stroke:var(--bd);stroke-width:1}.np{fill:#e5484d;stroke:#fff;stroke-width:.7}.nn{fill:#fff;stroke:#9aa6bd;stroke-width:.7}.e{fill:#3d5afe;stroke:var(--cd);stroke-width:.8}.legend{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:6px 0 10px;font-size:12px}.legend span{display:inline-flex;align-items:center;gap:5px}.dot{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid var(--bd)}.dot.p{background:#e5484d}.dot.n{background:#fff}.dot.e{background:#3d5afe}.ionbox{margin:10px 0;padding:10px;border:1px solid var(--bd);border-radius:14px;background:var(--bg)}.ionrow{display:flex;flex-wrap:wrap;gap:6px}.ion{border:1px solid var(--bd);background:var(--cd);border-radius:10px;padding:5px 10px}.ion.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.nt{fill:#fff;font:700 8px Vazirmatn,sans-serif;text-anchor:middle}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:8px 0}
+.st div{padding:7px 2px;border-radius:12px;background:var(--bg);text-align:center;font-size:11px;line-height:1.4;color:var(--mu)}
+.st b{display:block;font-size:16px;color:var(--tx)}
+.ds{margin:8px 0}
+.sm{margin:6px 0;font-size:13px;color:var(--mu)}
+h3{margin:12px 0 4px;font-size:14px}
+.chip{display:inline-block;margin:3px;padding:2px 11px;border-radius:99px;background:var(--bg);border:1px solid var(--bd);animation:pop .4s backwards}.chip.iso{cursor:pointer}.chip.iso.on{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 0 10px var(--ac)}.iso-info{margin:8px 0;padding:10px 12px;border:1px solid var(--bd);border-radius:12px;background:var(--bg)}.iso-status{font-weight:700}.iso-status.stable{color:#1f9d55}.iso-status.unstable{color:#e5484d}
+.ra{border-color:#e5484d;color:#e5484d}
+.nv{display:flex;align-items:center;justify-content:space-between;margin-top:12px;color:var(--mu)}
+.nv button{width:44px;height:36px;border:1px solid var(--bd);border-radius:12px;background:var(--bg);font-size:20px}
+.qc{max-width:520px;margin:10px auto;padding:18px;background:var(--cd);border:1px solid var(--bd);border-radius:20px;animation:up .4s}
+.qc h2{margin:0 0 6px}
+.qc label{display:flex;align-items:center;justify-content:space-between;margin:10px 0}
+.qc input{width:96px;padding:8px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;text-align:center}
+.pr{display:block;width:100%;margin-top:8px;padding:12px;border:0;border-radius:14px;background:var(--ac);color:#fff;font-weight:700}
+.alt{background:var(--bd);color:var(--tx)}
+.er{min-height:1.4em;margin:4px 0;color:#e5484d}
+.meta{display:flex;justify-content:space-between;margin-bottom:6px;color:var(--mu)}
+.bar{height:6px;border-radius:9px;background:var(--bd);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ac);transition:width .4s}
+.qc h3{margin:14px 0 6px;font-size:17px;line-height:1.6}
+.op{display:block;width:100%;margin:8px 0;padding:12px;border:1px solid var(--bd);border-radius:14px;background:var(--bg);text-align:start;transition:.2s}
+.op:hover{border-color:var(--ac)}
+.ok{background:#1f9d55!important;border-color:#1f9d55;color:#fff}
+.no{background:#e5484d!important;border-color:#e5484d;color:#fff}
+.fb{margin:8px 0 0;font-weight:700;text-align:center}
+.big{font-size:52px;font-weight:700;color:var(--ac)}
+:root{--nl:38%}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--nl:72%}}
+:root[data-theme="dark"]{--nl:72%}
+.sc{padding:14px 12px 16px}
+.e{fill:hsl(var(--h) 100% var(--nl));stroke:none}
+.ob{stroke:var(--ac);stroke-opacity:.4}
+.nc{filter:drop-shadow(0 0 8px #ff5a5f)}
+.tabs .on,.pr{box-shadow:0 0 14px var(--ac)}
+.alt{box-shadow:none}
+.ok{box-shadow:0 0 14px #1f9d55}
+.no{box-shadow:0 0 14px #e5484d}
+@media(min-width:640px){:root{--c:52px}h1{font-size:27px}}
+@media(min-width:900px){:root{--c:58px}}
+@media(min-width:1100px){:root{--c:62px}}
+.brand{display:flex;align-items:center;gap:10px}
+.neon-icon{filter:drop-shadow(0 0 3px currentColor) drop-shadow(0 0 8px currentColor)}
+.logo{width:32px;height:32px;flex:none;color:var(--ac)}
+.bt{display:flex;align-items:center}
+.bt button svg{width:19px;height:19px;display:block}
+#th{width:40px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+#lg{height:36px}
+.icon-sun{color:#f2b640}
+.icon-moon{color:#2aabee}
+.icon-star{width:18px;height:18px;vertical-align:-3px;color:#f2b640}
+.bigstar{margin:6px 0}
+.bigstar .icon-star{width:46px;height:46px}
+button:focus:not(:focus-visible){outline:none}
+button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="brand"><svg class="neon-icon logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.7"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/></svg><h1 id="ti"></h1></div><div class="bt"><button id="lg"></button><button id="th" aria-label="Day / Night"></button></div></header>
+<nav class="tabs"><button id="t1" data-t="tb" class="on"></button><button id="t2" data-t="qz"></button></nav>
+<main>
+<section id="tb"><div class="lg" id="leg"></div><div class="sc" dir="ltr"><div class="grid" id="g"></div></div></section>
+<section id="qz" hidden></section>
+</main>
+<div class="ov" id="md" hidden><div class="box" id="bx"></div></div>
+<script>
+const $=s=>document.querySelector(s),ld=k=>{try{return localStorage.getItem(k)}catch(e){}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]),pick=a=>a[Math.random()*a.length|0];
+const CT={ak:["Alkali metal","فلز قلیایی"],ae:["Alkaline earth metal","فلز قلیایی خاکی"],md:["Metalloid","شبه‌فلز"],ln:["Lanthanide","لانتانید"],nm:["Nonmetal","نافلز"],pt:["Post-transition metal","فلز پس از واسطه"],tm:["Transition metal","فلز واسطه"],ac:["Actinide","آکتینید"],ng:["Noble gas","گاز نجیب"],hl:["Halogen","هالوژن"]};
+const K={},S=(k,l)=>l.forEach(z=>K[z]=k);
+S('nm',[1,6,7,8,15,16,34]);S('ng',[2,10,18,36,54,86,118]);S('ak',[3,11,19,37,55,87]);S('ae',[4,12,20,38,56,88]);S('hl',[9,17,35,53,85,117]);S('md',[5,14,32,33,51,52]);S('pt',[13,31,49,50,81,82,83,84,113,114,115,116]);
+const O=[[1,0],[2,0],[2,1],[3,0],[3,1],[4,0],[3,2],[4,1],[5,0],[4,2],[5,1],[6,0],[4,3],[5,2],[6,1],[7,0],[5,3],[6,2],[7,1]];
+const X={24:[2,8,13,1],29:[2,8,18,1],41:[2,8,18,12,1],42:[2,8,18,13,1],44:[2,8,18,15,1],45:[2,8,18,16,1],46:[2,8,18,18],47:[2,8,18,18,1],57:[2,8,18,18,9,2],58:[2,8,18,19,9,2],64:[2,8,18,25,9,2],78:[2,8,18,32,17,1],79:[2,8,18,32,18,1],89:[2,8,18,32,18,9,2],90:[2,8,18,32,18,10,2],91:[2,8,18,32,20,9,2],92:[2,8,18,32,21,9,2],93:[2,8,18,32,22,9,2],96:[2,8,18,32,25,9,2],103:[2,8,18,32,32,8,3]};
+function sh(z){if(X[z])return X[z];const s=[];let r=z;for(const[n,l]of O){if(!r)break;const c=Math.min(r,4*l+2);s[n-1]=(s[n-1]||0)+c;r-=c}return s}
+const D="H,Hydrogen,هیدروژن,1.008;He,Helium,هلیوم,4.0026;Li,Lithium,لیتیم,6.94;Be,Beryllium,بریلیم,9.0122;B,Boron,بور,10.81;C,Carbon,کربن,12.011;N,Nitrogen,نیتروژن,14.007;O,Oxygen,اکسیژن,15.999;F,Fluorine,فلوئور,18.998;Ne,Neon,نئون,20.18;Na,Sodium,سدیم,22.99;Mg,Magnesium,منیزیم,24.305;Al,Aluminium,آلومینیوم,26.982;Si,Silicon,سیلیسیم,28.085;P,Phosphorus,فسفر,30.974;S,Sulfur,گوگرد,32.06;Cl,Chlorine,کلر,35.45;Ar,Argon,آرگون,39.948;K,Potassium,پتاسیم,39.098;Ca,Calcium,کلسیم,40.078;Sc,Scandium,اسکاندیم,44.956;Ti,Titanium,تیتانیم,47.867;V,Vanadium,وانادیم,50.942;Cr,Chromium,کروم,51.996;Mn,Manganese,منگنز,54.938;Fe,Iron,آهن,55.845;Co,Cobalt,کبالت,58.933;Ni,Nickel,نیکل,58.693;Cu,Copper,مس,63.546;Zn,Zinc,روی,65.38;Ga,Gallium,گالیم,69.723;Ge,Germanium,ژرمانیم,72.63;As,Arsenic,آرسنیک,74.922;Se,Selenium,سلنیم,78.971;Br,Bromine,برم,79.904;Kr,Krypton,کریپتون,83.798;Rb,Rubidium,روبیدیم,85.468;Sr,Strontium,استرانسیم,87.62;Y,Yttrium,ایتریم,88.906;Zr,Zirconium,زیرکونیم,91.224;Nb,Niobium,نیوبیم,92.906;Mo,Molybdenum,مولیبدن,95.95;Tc,Technetium,تکنسیم,98;Ru,Ruthenium,روتنیم,101.07;Rh,Rhodium,رودیم,102.91;Pd,Palladium,پالادیم,106.42;Ag,Silver,نقره,107.87;Cd,Cadmium,کادمیم,112.41;In,Indium,ایندیم,114.82;Sn,Tin,قلع,118.71;Sb,Antimony,آنتیموان,121.76;Te,Tellurium,تلوریم,127.6;I,Iodine,ید,126.9;Xe,Xenon,زنون,131.29;Cs,Caesium,سزیم,132.91;Ba,Barium,باریم,137.33;La,Lanthanum,لانتان,138.91;Ce,Cerium,سریم,140.12;Pr,Praseodymium,پرازئودیمیم,140.91;Nd,Neodymium,نئودیمیم,144.24;Pm,Promethium,پرومتیم,145;Sm,Samarium,ساماریم,150.36;Eu,Europium,اروپیم,151.96;Gd,Gadolinium,گادولینیم,157.25;Tb,Terbium,تربیم,158.93;Dy,Dysprosium,دیسپروزیم,162.5;Ho,Holmium,هولمیم,164.93;Er,Erbium,اربیم,167.26;Tm,Thulium,تولیم,168.93;Yb,Ytterbium,ایتربیم,173.05;Lu,Lutetium,لوتتیم,174.97;Hf,Hafnium,هافنیم,178.49;Ta,Tantalum,تانتال,180.95;W,Tungsten,تنگستن,183.84;Re,Rhenium,رنیم,186.21;Os,Osmium,اسمیم,190.23;Ir,Iridium,ایریدیم,192.22;Pt,Platinum,پلاتین,195.08;Au,Gold,طلا,196.97;Hg,Mercury,جیوه,200.59;Tl,Thallium,تالیم,204.38;Pb,Lead,سرب,207.2;Bi,Bismuth,بیسموت,208.98;Po,Polonium,پولونیم,209;At,Astatine,آستاتین,210;Rn,Radon,رادون,222;Fr,Francium,فرانسیم,223;Ra,Radium,رادیم,226;Ac,Actinium,اکتینیم,227;Th,Thorium,توریم,232.04;Pa,Protactinium,پروتاکتینیم,231.04;U,Uranium,اورانیم,238.03;Np,Neptunium,نپتونیم,237;Pu,Plutonium,پلوتونیم,244;Am,Americium,امریسیم,243;Cm,Curium,کوریم,247;Bk,Berkelium,برکلیم,247;Cf,Californium,کالیفرنیم,251;Es,Einsteinium,انیشتینیم,252;Fm,Fermium,فرمیم,257;Md,Mendelevium,مندلیفیم,258;No,Nobelium,نوبلیم,259;Lr,Lawrencium,لارنسیم,266;Rf,Rutherfordium,رادرفوردیم,267;Db,Dubnium,دوبنیم,268;Sg,Seaborgium,سیبورگیم,269;Bh,Bohrium,بوهریم,270;Hs,Hassium,هاسیم,277;Mt,Meitnerium,مایتنریم,278;Ds,Darmstadtium,دارمشتادتیم,281;Rg,Roentgenium,رونتگنیم,282;Cn,Copernicium,کوپرنیسیم,285;Nh,Nihonium,نیهونیم,286;Fl,Flerovium,فلروویم,289;Mc,Moscovium,مسکوویم,290;Lv,Livermorium,لیورموریم,293;Ts,Tennessine,تنسین,294;Og,Oganesson,اوگانسون,294".split(";").map((s,i)=>{const[a,b,c,d]=s.split(","),z=i+1;return{z,s:a,e:b,f:c,m:+d,a:Math.round(d),k:K[z]||(z>56&&z<72?'ln':z>88&&z<104?'ac':'tm'),sh:sh(z)}});
+const ISO="1 2 3*|3 4|6 7|9 10*|10 11|12 13 14*|14 15|16 17 18|19|20 21 22|23|24 25 26|27|28 29 30|31|32 33 34 36|35 37|36 38 40|39 40* 41|40 42 43 44 46 48|45|46 47 48 49 50|50* 51|50 52 53 54|55|54 56 57 58|59|58 60 61 62 64|63 65|64 66 67 68 70|69 71|70 72 73 74 76|75|74 76 77 78 80 82|79 81|78 80 82 83 84 86|85 87*|84 86 87 88|89|90 91 92 94 96|93|92 94 95 96 97 98 100|97* 98* 99*|96 98 99 100 101 102 104|103|102 104 105 106 108 110|107 109|106 108 110 111 112 113* 114 116|113 115*|112 114 115 116 117 118 119 120 122 124|121 123|120 122 123 124 125 126 128 130|127 129*|124 126 128 129 130 131 132 134 136|133|130 132 134 135 136 137 138|138* 139|136 138 140 142|141|142 143 144* 145 146 148 150|145* 146* 147*|144 147* 148* 149 150 152 154|151 153|152* 154 155 156 157 158 160|159|156 158 160 161 162 163 164|165|162 164 166 167 168 170|169|168 170 171 172 173 174 176|175 176*|174* 176 177 178 179 180|180 181|180 182 183 184 186|185 187*|184 186* 187 188 189 190 192|191 193|190* 192 194 195 196 198|197|196 198 199 200 201 202 204|203 205|204 206 207 208|209|208* 209* 210*|209* 210* 211*|219* 220* 222*|221* 223*|223* 224* 226* 228*|225* 227* 228*|227* 228* 230* 231* 232* 234*|231* 233* 234*|233* 234* 235* 236* 238*|235* 236* 237* 239*|238* 239* 240* 241* 242* 244*|241* 242* 243*|242* 243* 244* 245* 246* 247* 248*|247* 249*|249* 250* 251* 252*|252* 253* 254*|253* 255* 257*|256* 257* 258* 260*|255* 259*|261* 262* 266*|261* 267*|262* 268*|265* 269*|267* 270*|269* 270* 277*|266* 268* 278*|269* 271* 281*|272* 282*|283* 285*|278* 286*|287* 288* 289*|288* 290*|290* 291* 292* 293*|293* 294*|294*".split("|");
+const pos=z=>z<2?[1,1]:z<3?[1,18]:z<5?[2,z-2]:z<11?[2,z+8]:z<13?[3,z-10]:z<19?[3,z]:z<37?[4,z-18]:z<55?[5,z-36]:z<57?[6,z-54]:z<72?[9,z-54]:z<87?[6,z-68]:z<89?[7,z-86]:z<104?[10,z-86]:[7,z-100];
+const per=z=>z<3?1:z<11?2:z<19?3:z<37?4:z<55?5:z<87?6:7,intab=z=>!(z>56&&z<72||z>88&&z<104),grp=z=>intab(z)?pos(z)[1]:0;
+const T={
+en:{ti:"Periodic Table",tb:"Table",qz:"Quiz",z:"Atomic no.",m:"Atomic mass",a:"Mass no.",n:"Neutrons ≈",sh:"Electrons per shell",is:"Natural & key isotopes (* radioactive)",no:"No isotope data.",fr:"From element no.",to:"To element no.",cn:"Number of questions",go:"Start",er:"Choose a range of at least 4 elements.",ok:"Correct!",bad:"Wrong. Correct answer:",sc:"Your score",again:"Try again",nw:"New quiz",pd:"period",gp:"group",c:", ",gas:"It is a gas at room temperature.",liq:"It is a liquid at room temperature.",sol:"It is a solid at room temperature.",unk:"It is extremely rare or short-lived, so its bulk state is not established.",rad:" All of its isotopes are radioactive.",
+q:[x=>`Which element has the symbol <bdi>${x}</bdi>?`,x=>`What is the chemical symbol of ${x}?`,x=>`What is the atomic number of ${x}?`,x=>`Which element has atomic number ${x}?`,x=>`How many electron shells does ${x} have?`,x=>`How many electrons are in the outermost shell of ${x}?`,x=>`Which group of the periodic table is ${x} in?`]},
+fa:{ti:"جدول تناوبی",tb:"جدول",qz:"پرسش و پاسخ",z:"عدد اتمی",m:"جرم اتمی",a:"عدد جرمی",n:"نوترون (≈)",sh:"الکترون‌ها در هر لایه",is:"ایزوتوپ‌های طبیعی و مهم (* پرتوزا)",no:"داده‌ای موجود نیست.",fr:"از عنصر شماره",to:"تا عنصر شماره",cn:"تعداد سوال‌ها",go:"شروع",er:"بازه‌ای دست‌کم ۴ عنصری انتخاب کنید.",ok:"آفرین، درست!",bad:"نادرست. پاسخ درست:",sc:"امتیاز شما",again:"تلاش دوباره",nw:"آزمون جدید",pd:"تناوب",gp:"گروه",c:"، ",gas:"در دمای اتاق گاز است.",liq:"در دمای اتاق مایع است.",sol:"در دمای اتاق جامد است.",unk:"به‌دلیل کمیابی یا نیمه‌عمر کوتاه، حالت فیزیکی آن مشخص نیست.",rad:" همه‌ی ایزوتوپ‌های آن پرتوزا هستند.",
+q:[x=>`کدام عنصر نماد <bdi>${x}</bdi> دارد؟`,x=>`نماد شیمیایی ${x} کدام است؟`,x=>`عدد اتمی ${x} چند است؟`,x=>`کدام عنصر عدد اتمی ${x} دارد؟`,x=>`${x} چند لایه‌ی الکترونی دارد؟`,x=>`تعداد الکترون‌های لایه‌ی آخر ${x} چند است؟`,x=>`${x} در کدام گروه جدول تناوبی قرار دارد؟`]}};
+let lang='fa',cur=1,Q={p:0},selectedCat=null;
+const N=x=>lang=='fa'?(''+x).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]).replace('.','٫'):''+x,nm=d=>lang=='fa'?d.f:d.e,cn=k=>CT[k][lang=='fa'?1:0];
+function build(){let h='';D.forEach(d=>{const[r,c]=pos(d.z);h+=`<button class="el ${d.k}" style="grid-area:${r}/${c};animation-delay:${d.z*9}ms" data-z="${d.z}" aria-label="${d.e}"><i>${N(d.a)}</i><b>${d.s}</b><small>${N(d.z)}</small><em>${nm(d)}</em></button>`});
+h+=`<div class="el ph" style="grid-area:6/3"><b>${N('57–71')}</b></div><div class="el ph" style="grid-area:7/3"><b>${N('89–103')}</b></div>`;$('#g').innerHTML=h;applyCategory()}
+function bohr(d,a,charge=0){const electrons=Math.max(0,d.z-charge),shells=shForElectrons(electrons),n=shells.length;let o='';
+const pts=[];for(let i=0;i<d.z;i++){const ang=(i*2.39996),rr=12+Math.sqrt(i)*2.2;pts.push(`<circle class="np" cx="${(rr*Math.cos(ang)).toFixed(1)}" cy="${(rr*Math.sin(ang)).toFixed(1)}" r="${d.z>80?2.3:3}"/>`)}
+const nn=Math.max(0,a-d.z);for(let i=0;i<nn;i++){const ang=(i*2.39996)+1.2,rr=12+Math.sqrt(i)*2.2;pts.push(`<circle class="nn" cx="${(rr*Math.cos(ang)).toFixed(1)}" cy="${(rr*Math.sin(ang)).toFixed(1)}" r="${d.z>80?2.3:3}"/>`)}
+shells.forEach((c,i)=>{const R=n>1?38+i*88/(n-1):62;let e='';for(let j=0;j<c;j++){const t=6.2832*j/c;e+=`<circle class="e" cx="${(R*Math.cos(t)).toFixed(1)}" cy="${(R*Math.sin(t)).toFixed(1)}" r="${c>18?3:4}"/>`}o+=`<circle class="ob" r="${R.toFixed(1)}"/>${e}`});
+return`<svg viewBox="0 0 300 300" role="img" aria-label="Bohr model of ${d.e}"><g transform="translate(150 150)">${o}<circle class="nc" r="${Math.min(50,Math.max(24,10+Math.sqrt(d.z+nn)*4)).toFixed(1)}" fill="var(--bg)"/>${pts.join('')}</g></svg>`}
+function shForElectrons(e){if(e<=0)return[];const out=[],caps=[2,8,18,32,32,18,8];let r=e;for(const cap of caps){const c=Math.min(r,cap);out.push(c);r-=c;if(!r)break}return out}
+const ION={1:[1,-1],2:[],3:[1],4:[2],5:[3,-3],6:[4,-4,2],7:[-3,3,5],8:[-2],9:[-1],10:[],11:[1],12:[2],13:[3],14:[4,-4],15:[-3,3,5],16:[-2,4,6],17:[-1,1,3,5,7],18:[],19:[1],20:[2],21:[3],22:[2,3,4],23:[2,3,4,5],24:[2,3,6],25:[2,3,4,7],26:[2,3],27:[2,3],28:[2,3],29:[1,2],30:[2],31:[3],32:[2,4],33:[-3,3,5],34:[-2,4,6],35:[-1,1,3,5,7],36:[],37:[1],38:[2],39:[3],40:[4],41:[3,5],42:[2,3,4,5,6],43:[4,7],44:[2,3,4,6,8],45:[3],46:[2,4],47:[1],48:[2],49:[3],50:[2,4],51:[-3,3,5],52:[-2,4,6],53:[-1,1,3,5,7],54:[],55:[1],56:[2],57:[3],58:[3,4],59:[3],60:[3],61:[3],62:[2,3],63:[2,3],64:[3],65:[3,4],66:[3],67:[3],68:[3],69:[3],70:[2,3],71:[3],72:[4],73:[5],74:[4,6],75:[4,6,7],76:[4,6,8],77:[3,4],78:[2,4,6],79:[1,3],80:[1,2],81:[1,3],82:[2,4],83:[3,5],84:[2,4,6],85:[-1,1,3,5,7],86:[],87:[1],88:[2],89:[3],90:[4],91:[3,4,5],92:[4,6],93:[3,4,5,6],94:[3,4,5,6],95:[3,4,5,6],96:[2,3],97:[3,4],98:[3,4],99:[3],100:[2,3],101:[3],102:[2,3],103:[3],104:[4],105:[5],106:[6],107:[5],108:[8],109:[3],110:[2,4,6],111:[1,3],112:[2],113:[1,3],114:[2,4],115:[1,3],116:[2,4,6],117:[-1,1,3,5,7],118:[]};
+function ionLabel(q){return q===0?'اتم خنثی':q>0?'+'+N(q):'−'+N(Math.abs(q))}
+const USES={1:'در سوخت\u200cها، پالایش نفت و سلول\u200cهای سوختی کاربرد دارد.',2:'در بالن\u200cها و کشتی\u200cهای هوایی و برخی تجهیزات سرمایشی استفاده می\u200cشود.',3:'در باتری\u200cهای لیتیومی وسایل الکترونیکی و خودروهای برقی کاربرد دارد.',4:'در آلیاژهای سبک، هوافضا و پنجره\u200cهای مقاوم به پرتو ایکس استفاده می\u200cشود.',5:'در شیشه\u200cهای مقاوم به حرارت، مواد شوینده و برخی نیمه\u200cرساناها کاربرد دارد.',6:'در سوخت\u200cها، فولاد، الکترودها و مواد آلی بسیار مهم است.',7:'جزء اصلی هوای جو و برای ساخت کودهای نیتروژنه استفاده می\u200cشود.',8:'برای تنفس، پزشکی، جوشکاری و فرایندهای صنعتی کاربرد دارد.',9:'در خمیردندان برای کمک به پیشگیری از پوسیدگی دندان استفاده می\u200cشود.',10:'در تابلوهای نورانی و لامپ\u200cهای تخلیه الکتریکی کاربرد دارد.',11:'در نمک خوراکی، صنایع شیمیایی و تنظیم آب کاربرد دارد.',12:'در آلیاژهای سبک، قطعات خودرو و برخی داروها و مکمل\u200cها کاربرد دارد.',13:'در قوطی\u200cها، فویل، هواپیما و آلیاژهای سبک استفاده می\u200cشود.',14:'در شیشه، بتن، سیلیکون و قطعات الکترونیکی و تراشه\u200cها کاربرد دارد.',15:'در کودهای کشاورزی، مواد شوینده و ترکیبات شیمیایی استفاده می\u200cشود.',16:'در تولید اسید سولفوریک، کودها و فرایندهای صنعتی کاربرد دارد.',17:'برای ضدعفونی آب، ساخت PVC و نمک\u200cهای کلریدی استفاده می\u200cشود.',18:'در لامپ\u200cها و محیط\u200cهای بی\u200cاثر برای فرایندهای صنعتی و آزمایشگاهی کاربرد دارد.',19:'در کودهای کشاورزی و تولید برخی صابون\u200cها و مواد شیمیایی استفاده می\u200cشود.',20:'در سیمان، گچ، آهک و ساخت\u200cوساز کاربرد دارد.',21:'در آلیاژهای مقاوم و برخی تجهیزات پزشکی و صنعتی استفاده می\u200cشود.',22:'در رنگ\u200cدانه\u200cهای سفید، رنگ و آلیاژهای مقاوم کاربرد دارد.',23:'در فولادهای مقاوم و برخی کاتالیزورها استفاده می\u200cشود.',24:'در فولاد زنگ\u200cنزن، آبکاری و رنگ\u200cدانه\u200cها کاربرد دارد.',25:'در تولید فولاد، باتری و آلیاژهای مختلف استفاده می\u200cشود.',26:'برای ساخت فولاد، ابزار، ساختمان و بسیاری از ماشین\u200cآلات کاربرد دارد.',27:'در آلیاژهای مقاوم، باتری\u200cها و کاتالیزورها استفاده می\u200cشود.',28:'در آلیاژها، آبکاری و برخی کاتالیزورها کاربرد دارد.',29:'در سیم\u200cهای برق، لوله\u200cها، آلیاژها و قطعات الکترونیکی استفاده می\u200cشود.',30:'برای گالوانیزه کردن آهن و در باتری\u200cها و آلیاژها کاربرد دارد.',31:'در نیمه\u200cرساناها، LEDها و آلیاژهای خاص استفاده می\u200cشود.',32:'در نیمه\u200cرساناها و برخی آلیاژها کاربرد دارد.',33:'در مواد نیمه\u200cرسانا و برخی مواد نگهدارنده کاربرد دارد.',34:'در شیشه\u200cسازی، الکترونیک و برخی ترکیبات دارویی کاربرد دارد.',35:'در ضدعفونی، مواد بازدارنده شعله و برخی ترکیبات صنعتی استفاده می\u200cشود.',36:'در لامپ\u200cهای فلورسنت و برخی لیزرها کاربرد دارد.',37:'در پژوهش و برخی ساعت\u200cهای اتمی و تجهیزات علمی کاربرد دارد.',38:'در مواد درخشان، آتش\u200cبازی و برخی تجهیزات پزشکی کاربرد دارد.',39:'در آلیاژهای آلومینیومی و مواد سرامیکی استفاده می\u200cشود.',40:'در آلیاژهای مقاوم و تجهیزات مقاوم به خوردگی کاربرد دارد.',41:'در سوپرآلیاژها و تجهیزات مقاوم به حرارت استفاده می\u200cشود.',42:'در فولادهای مقاوم و کاتالیزورها کاربرد دارد.',43:'در پزشکی هسته\u200cای و پژوهش به\u200cعنوان ماده پرتوزا استفاده می\u200cشود.',44:'در کاتالیزورها و آلیاژهای مقاوم کاربرد دارد.',45:'در کاتالیزورهای خودرو و آلیاژهای مقاوم استفاده می\u200cشود.',46:'در کاتالیزورها، جواهرات و تجهیزات شیمیایی کاربرد دارد.',47:'در زیورآلات، آینه\u200cها، اتصالات الکتریکی و برخی مواد پزشکی استفاده می\u200cشود.',48:'در باتری\u200cها، آبکاری و برخی آلیاژها کاربرد دارد.',49:'در نیمه\u200cرساناها، نمایشگرها و آلیاژهای خاص استفاده می\u200cشود.',50:'در قلع\u200cاندود کردن فلزات، لحیم و برخی آلیاژها کاربرد دارد.',51:'در آلیاژها، باتری\u200cها و مواد مقاوم در برابر شعله استفاده می\u200cشود.',52:'در نیمه\u200cرساناها و برخی آلیاژها و شیشه\u200cهای خاص کاربرد دارد.',53:'در ضدعفونی، پزشکی هسته\u200cای و تولید ترکیبات یددار کاربرد دارد.',54:'در لامپ\u200cها و برخی کاربردهای پژوهشی و پزشکی استفاده می\u200cشود.',55:'در ساعت\u200cهای اتمی، حفاری و برخی پژوهش\u200cهای علمی کاربرد دارد.',56:'در گلوله\u200cهای آزمایشگاهی، شیشه و برخی کاربردهای پزشکی استفاده می\u200cشود.',57:'در شیشه\u200cهای ویژه، کاتالیزورها و پژوهش\u200cهای مواد کاربرد دارد.',58:'در کاتالیزورهای خودرو و شیشه\u200cهای خاص استفاده می\u200cشود.',59:'در رنگ\u200cدانه\u200cها و شیشه\u200cهای ویژه کاربرد دارد.',60:'در آهن\u200cرباهای قوی و برخی شیشه\u200cهای رنگی استفاده می\u200cشود.',61:'در پزشکی هسته\u200cای و پژوهش کاربرد دارد.',62:'در آهن\u200cرباهای قوی و برخی مواد الکترونیکی استفاده می\u200cشود.',63:'در نمایشگرها، آهن\u200cرباها و برخی مواد فلورسنت کاربرد دارد.',64:'در آهن\u200cرباهای قوی و تجهیزات تصویربرداری کاربرد دارد.',65:'در مواد مغناطیسی و تجهیزات الکترونیکی استفاده می\u200cشود.',66:'در آهن\u200cرباهای قوی و مواد لیزری کاربرد دارد.',67:'در آهن\u200cرباها و برخی کاربردهای لیزری استفاده می\u200cشود.',68:'در فیبر نوری، لیزرها و برخی تجهیزات پزشکی کاربرد دارد.',69:'در لیزرها و پژوهش\u200cهای علمی استفاده می\u200cشود.',70:'در مواد مغناطیسی و برخی قطعات الکترونیکی کاربرد دارد.',71:'در شیشه\u200cهای خاص، کاتالیزورها و برخی کاربردهای پزشکی استفاده می\u200cشود.',72:'در آلیاژهای مقاوم به حرارت و ابزارهای برش کاربرد دارد.',73:'در ابزارهای برش، تجهیزات پزشکی و آلیاژهای مقاوم استفاده می\u200cشود.',74:'در ابزارهای برش، رشته\u200cهای مقاوم به حرارت و آلیاژهای سخت کاربرد دارد.',75:'در کاتالیزورها و آلیاژهای مقاوم به حرارت استفاده می\u200cشود.',76:'در آلیاژهای بسیار سخت، ابزارها و کنتاکت\u200cهای الکتریکی کاربرد دارد.',77:'در کاتالیزورها، آلیاژها و تجهیزات الکتریکی استفاده می\u200cشود.',78:'در کاتالیزورها، جواهرات و تجهیزات آزمایشگاهی کاربرد دارد.',79:'در جواهرات، اتصالات الکتریکی و کاربردهای صنعتی استفاده می\u200cشود.',80:'در دماسنج\u200cهای قدیمی، لامپ\u200cها و برخی تجهیزات علمی کاربرد داشته است.',81:'در آلیاژها و برخی کاربردهای الکترونیکی و صنعتی استفاده می\u200cشود.',82:'در باتری\u200cهای سربی، محافظت در برابر پرتو و آلیاژها کاربرد دارد.',83:'در آلیاژهای خاص و برخی کاربردهای پزشکی و پژوهشی استفاده می\u200cشود.',84:'در پژوهش\u200cهای هسته\u200cای و به\u200cعنوان منبع پرتوزا کاربرد دارد.',85:'کاربردهای آن محدود و عمدتاً پژوهشی و هسته\u200cای است.',86:'در پژوهش\u200cهای علمی و آشکارسازهای پرتوزایی کاربرد دارد.',87:'کاربردهای آن بسیار محدود و عمدتاً پژوهشی است.',88:'در پژوهش و تولید برخی عناصر هسته\u200cای کاربرد دارد.',89:'در پژوهش\u200cهای هسته\u200cای و تولید عناصر سنگین\u200cتر استفاده می\u200cشود.',90:'در پژوهش هسته\u200cای و برخی فناوری\u200cهای مرتبط با سوخت هسته\u200cای کاربرد دارد.',91:'تقریباً فقط در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',92:'در سوخت هسته\u200cای و تولید انرژی در نیروگاه\u200cهای هسته\u200cای کاربرد دارد.',93:'در پژوهش و ساخت برخی منابع و مواد هسته\u200cای استفاده می\u200cشود.',94:'در پژوهش\u200cهای هسته\u200cای و برخی منابع انرژی فضایی کاربرد دارد.',95:'در پژوهش هسته\u200cای و برخی منابع انرژی کاربرد دارد.',96:'تقریباً فقط در پژوهش\u200cهای هسته\u200cای استفاده می\u200cشود.',97:'کاربرد اصلی آن پژوهش\u200cهای هسته\u200cای است.',98:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',99:'تقریباً فقط برای پژوهش و مطالعه عناصر سنگین استفاده می\u200cشود.',100:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',101:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',102:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',103:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',104:'در پژوهش\u200cهای هسته\u200cای و مطالعه عناصر فوق\u200cسنگین کاربرد دارد.',105:'تقریباً فقط برای پژوهش\u200cهای هسته\u200cای تولید می\u200cشود.',106:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',107:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',108:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',109:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',110:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',111:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',112:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',113:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',114:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',115:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',116:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',117:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.',118:'در پژوهش\u200cهای هسته\u200cای کاربرد دارد.'};
+function desc(d){const t=T[lang],z=d.z,g=grp(z),gas=[1,2,7,8,9,10,17,18,36,54,86].includes(z),liq=z==35||z==80,unk=z>98||z==85||z==87;const use=USES[z]||'کاربردهای آن بیشتر در پژوهش و صنایع تخصصی است.';return `${nm(d)} (${d.s}) — ${cn(d.k).toLowerCase()}${t.c}${t.pd} ${N(per(z))}${g?t.c+t.gp+' '+N(g):''}. ${gas?t.gas:liq?t.liq:unk?t.unk:t.sol}${z==43||z==61||z>=84?t.rad:''} <b>کاربرد:</b> ${use}`}
+const md=$('#md');
+let currentA=null,currentQ=0;
+function show(z,a=null,q=0){cur=z;const d=D[z-1],t=T[lang],I=ISO[z-1]||'',b=$('#bx');if(a===null)a=Number(d.a);currentA=a;currentQ=q;md.hidden=false;b.className='box '+d.k;b.scrollTop=0;
+const isoItems=I?I.split(' ').map(x=>{const v=parseInt(x),r=x.slice(-1)=='*';return{v,r}}):[];
+const selectedIso=isoItems.find(x=>x.v===a);
+const isoButtons=isoItems.map(x=>`<button class="chip iso${x.v==a?' on':''}" data-a="${x.v}" title="${x.r?'ایزوتوپ ناپایدار':'ایزوتوپ پایدار'}"><sup>${N(x.v)}</sup>${d.s}${x.r?'*':''}${x.v==a?' ✓':''}</button>`).join('');
+const isoInfo=selectedIso?`<div class="iso-info"><div><b>ایزوتوپ انتخاب‌شده:</b> <strong>${N(selectedIso.v)}${d.s}</strong> ✓</div><div class="iso-status ${selectedIso.r?'unstable':'stable'}">${selectedIso.r?'ناپایدار (رادیواکتیو)':'پایدار'}</div><div class="sm">${selectedIso.r?'علامت * در فهرست یعنی این ایزوتوپ ناپایدار/رادیواکتیو است.':'این ایزوتوپ در داده‌های این جدول پایدار مشخص شده است.'}</div></div>`:'';
+const ions=ION[z]||[];const ionButtons=`<button class="ion${q==0?' on':''}" data-q="0">اتم خنثی</button>`+(ions.length?ions.map(v=>`<button class="ion${q==v?' on':''}" data-q="${v}">${ionLabel(v)}</button>`).join(''):`<span class="sm">برای این عنصر یون تک‌اتمی رایج ثبت نشده است.</span>`);
+const e=Math.max(0,z-q),n=a-z;
+b.innerHTML=`<button class="x" id="cl" aria-label="close">✕</button><div class="hd"><span class="sy">${d.s}</span><div><h2>${nm(d)}</h2><p>${lang=='fa'?d.e:d.f}</p></div></div><div class="bohr">${bohr(d,a,q)}</div><div class="legend"><span><i class="dot p"></i>پروتون</span><span><i class="dot n"></i>نوترون</span><span><i class="dot e"></i>الکترون</span></div><div class="st"><div><b>${N(z)}</b>${t.z}</div><div><b>${N(a)}</b>عدد جرمی</div><div><b>${N(n)}</b>نوترون</div><div><b>${N(e)}</b>الکترون</div></div><div class="ionbox"><b>انتخاب یون:</b><div class="ionrow">${ionButtons}</div><p class="sm">بار: <strong>${ionLabel(q)}</strong> — با تغییر یون، تعداد الکترون‌ها تغییر می‌کند و هسته تغییر نمی‌کند.</p></div><p class="ds">${desc(d)}</p><p class="sm"><b>${t.sh}:</b> ${N(shForElectrons(e).join(' · '))}</p><h3>${t.is}</h3>${isoInfo}${isoButtons||`<p class="sm">${t.no}</p>`}<div class="nv" dir="ltr"><button id="pv">‹</button><span>${N(z)} / ${N(118)}</span><button id="nx">›</button></div>`}
+const go=n=>{if(selectedCat){const ids=D.filter(d=>d.k===selectedCat).map(d=>d.z);if(ids.length){let i=ids.indexOf(cur);if(i<0)i=0;else i=(i+(n>cur?1:-1)+ids.length)%ids.length;show(ids[i],currentA,currentQ);return}}show(n<1?118:n>118?1:n)};
+md.onclick=e=>{const t=e.target.closest('button');if(e.target==md||e.target.id=='cl')md.hidden=true;else if(t?.id=='pv')go(cur-1);else if(t?.id=='nx')go(cur+1);else if(t?.dataset.a)show(cur,+t.dataset.a,currentQ);else if(t?.dataset.q!==undefined)show(cur,currentA,+t.dataset.q)};
+addEventListener('keydown',e=>{if(md.hidden)return;if(e.key=='Escape')md.hidden=true;if(e.key=='ArrowRight')go(cur+1);if(e.key=='ArrowLeft')go(cur-1)});
+$('#g').onclick=e=>{const b=e.target.closest('[data-z]');if(!b)return;if(selectedCat&&D[+b.dataset.z-1].k!==selectedCat)return;show(+b.dataset.z)};
+/* quiz */
+const lb=(ty,v)=>ty==0||ty==3?nm(D[v-1]):ty==1?D[v-1].s:N(v);
+function mk(z,pool){const d=D[z-1],main=!['tm','ln','ac'].includes(d.k),ty=pick([0,1,2,3,...(z!=46?[4]:[]),...(main?[5]:[]),...(intab(z)?[6]:[])]);let c=z,o;
+if(ty<4)o=shuf(pool.filter(x=>x!=z)).slice(0,3);
+else{c=ty==4?per(z):ty==5?d.sh[d.sh.length-1]:grp(z);const m=ty==4?7:ty==5?8:18;o=shuf([...Array(m).keys()].map(x=>x+1).filter(x=>x!=c)).slice(0,3)}
+return{z,ty,c,o:shuf([c,...o])}}
+function begin(a,b,c){const pool=[];for(let z=a;z<=b;z++)pool.push(z);let o=[];while(o.length<c)o=o.concat(shuf(pool));o.length=c;Q={f:a,o:b,n:c,l:o.map(z=>mk(z,pool)),i:0,s:0,k:null,p:1};qUI()}
+function start(){const cl=(v,lo,hi,df)=>Math.min(hi,Math.max(lo,parseInt(v)||df));let a=cl($('#f').value,1,118,1),b=cl($('#o').value,1,118,118),c=cl($('#n').value,5,100,20);if(a>b)[a,b]=[b,a];Q.f=a;Q.o=b;Q.n=c;if(b-a<3){qUI();$('#er').textContent=T[lang].er;return}begin(a,b,c)}
+function pickA(v){if(Q.k!==null)return;const c=Q.l[Q.i];Q.k=v;if(v==c.c)Q.s++;qUI();setTimeout(()=>{if(Q.p!=1)return;Q.k=null;if(Q.i>=Q.l.length-1)Q.p=2;else Q.i++;qUI()},1300)}
+function qUI(){const t=T[lang],n=Q.l?Q.l.length:0;let h;
+if(Q.p==0)h=`<div class="qc"><h2>${t.qz}</h2><label>${t.fr}<input id="f" type="number" inputmode="numeric" min="1" max="118" value="${Q.f||1}"></label><label>${t.to}<input id="o" type="number" inputmode="numeric" min="1" max="118" value="${Q.o||36}"></label><label>${t.cn}<input id="n" type="number" inputmode="numeric" min="5" max="100" value="${Q.n||20}"></label><p class="er" id="er"></p><button class="pr" id="go">${t.go}</button></div>`;
+else if(Q.p==1){const c=Q.l[Q.i],d=D[c.z-1],x=c.ty==3?N(c.z):c.ty==0?d.s:nm(d),a=Q.k!==null;
+h=`<div class="qc"><div class="meta"><span>${N(Q.i+1)} / ${N(n)}</span><span>${IC.star} ${N(Q.s)}</span></div><div class="bar"><i style="width:${Q.i/n*100}%"></i></div><h3>${t.q[c.ty](x)}</h3>${c.o.map(v=>`<button class="op${a?v==c.c?' ok':v==Q.k?' no':'':''}" data-v="${v}">${lb(c.ty,v)}</button>`).join('')}${a?`<p class="fb">${Q.k==c.c?t.ok:t.bad+' '+lb(c.ty,c.c)}</p>`:''}</div>`}
+else h=`<div class="qc" style="text-align:center"><h2>${t.sc}</h2><div class="big">${N(Q.s)} / ${N(n)}</div><p class="bigstar">${IC.star}</p><button class="pr" id="ag">${t.again}</button><button class="pr alt" id="nq">${t.nw}</button></div>`;
+$('#qz').innerHTML=h}
+$('#qz').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.id=='go')start();else if(b.id=='ag')begin(Q.f,Q.o,Q.n);else if(b.id=='nq'){Q.p=0;qUI()}else if(b.dataset.v)pickA(+b.dataset.v)};
+const IC={
+sun:'<svg class="neon-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>',
+moon:'<svg class="neon-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>',
+star:'<svg class="neon-icon icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.41 6.28 6.72.35-5.23 4.24 1.74 6.5L12 16.7l-5.64 3.67 1.74-6.5L2.87 9.63l6.72-.35z"/></svg>'};
+/* shell */
+function applyCategory(){const grid=$('#g');document.querySelectorAll('#leg span').forEach(x=>x.classList.toggle('sel',x.dataset.cat==='all'?!selectedCat:x.dataset.cat===selectedCat));grid.classList.toggle('cat-focus',!!selectedCat);grid.querySelectorAll('.el[data-z]').forEach(b=>b.classList.toggle('cat-match',!!selectedCat&&D[+b.dataset.z-1].k===selectedCat))}
+function setLang(l){lang=l;sv('lang',l);const t=T[l],h=document.documentElement;h.lang=l;h.dir=l=='fa'?'rtl':'ltr';document.title=t.ti;$('#ti').textContent=t.ti;$('#lg').textContent=l=='fa'?'EN':'فارسی';$('#t1').textContent=t.tb;$('#t2').textContent=t.qz;
+$('#leg').innerHTML=`<span class="all" data-cat="all" title="${lang=='fa'?'نمایش همه عناصر':'Show all elements'}">${lang=='fa'?'همه':'All'}</span>`+Object.keys(CT).map(k=>`<span class="${k}" data-cat="${k}" title="${lang=='fa'?'نمایش عناصر این دسته':'Show this category'}">${cn(k)}</span>`).join('');build();qUI();applyCategory();if(!md.hidden)show(cur)}
+function theme(t){document.documentElement.dataset.theme=t;sv('th',t);$('#th').innerHTML=t=='dark'?IC.sun:IC.moon}
+$('#leg').onclick=e=>{const b=e.target.closest('[data-cat]');if(!b)return;selectedCat=b.dataset.cat==='all'?null:(selectedCat===b.dataset.cat?null:b.dataset.cat);applyCategory();if(selectedCat&&D[cur-1].k!==selectedCat){const first=D.find(d=>d.k===selectedCat);if(first)show(first.z)}};
+$('#th').onclick=()=>theme(document.documentElement.dataset.theme=='dark'?'light':'dark');
+$('#lg').onclick=()=>setLang(lang=='fa'?'en':'fa');
+document.querySelector('.tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;['tb','qz'].forEach(id=>$('#'+id).hidden=id!=b.dataset.t);document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x==b))};
+theme(ld('th')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+setLang(ld('lang')||'fa');
+</script>
+</body>
+</html>
